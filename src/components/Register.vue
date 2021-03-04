@@ -7,11 +7,11 @@
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
             <input 
-              id="icon_prefix" 
+              id="email" 
               type="email" 
               class="validate"
               v-model="mail">
-            <label for="icon_prefix">Mail</label>
+            <label for="email">Mail</label>
             <span class="helper-text" data-error="wrong" data-success="right"></span>
           </div>
           <div class="input-field col s12">
@@ -38,14 +38,15 @@
           </div>
         </div>
         <button 
+          id="submitRegister"
           class="btn waves-effect waves-light" 
           :class="isFilled()?'':'disabled'"
           v-on:click="register()">Submit
           <i class="material-icons right">send</i>
         </button>
         <div>
-          <p class="deep-orange lighten-1" v-if="!isMailOk()">Mail is not valid</p>
-          <p class="deep-orange lighten-1" v-if="!ispasswordOk()">Passwords are not the same or too short</p>
+          <p id="errorMail" class="deep-orange lighten-1" v-if="!isMailOk()">Mail is not valid</p>
+          <p id="errorPassword" class="deep-orange lighten-1" v-if="!ispasswordOk()">Passwords are not the same or too short</p>
         </div>
 
       </div>
