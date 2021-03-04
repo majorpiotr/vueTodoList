@@ -12,26 +12,26 @@
             type="text" 
             class="validate"
             v-model="item.text">
-          <label :for="'input'.concat('of', item.id)">Text</label>
+          <label v-if="item.text.length==0 " :for="'input'.concat('of', item.id)">Text</label>
         </div>
-        <div class="switch col s6">
+        <div class="switch  col s6">
           <label>
-            Active
+              Active
             <input type="checkbox" v-model="item.done">
             <span class="lever"></span>
               Done
           </label>
         </div>
       </div>
-      <div class="btn  waves-effect waves-light red" v-on:click="Remove()">
+      <div class="btn  waves-effect waves-light  pink darken-1" v-on:click="Remove()">
         Remove
       </div>
-      <div class="btn  waves-effect waves-light green" v-on:click="Save()" >
+      <div class="btn  waves-effect waves-light light-green darken-1" v-on:click="Save()" >
         Save
       </div>
     </div>
     <div class="secondary-content">
-      <div class="btn-floating btn-large waves-effect waves-light blue" v-on:click="edit=!edit">
+      <div class="btn-floating btn-large waves-effect waves-light deep-purple darken-1" v-on:click="edit=!edit">
         <i class="material-icons">build</i>
       </div>
     </div>

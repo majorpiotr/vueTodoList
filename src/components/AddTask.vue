@@ -1,10 +1,10 @@
 <template>
   <div>
-    <p>Add New</p>
+    <H4>Add New</H4>
     <div class="row">
       <div class="input-field col s6">
         <input placeholder="Task Text" id="first_name" type="text" class="validate" v-model="text">
-        <label for="first_name">Task Text</label>
+        <label v-if="text.length==0 " for="first_name">Task Text</label>
       </div>
       <div class="switch col s3">
         <label>
@@ -18,7 +18,7 @@
         <button 
           class="btn waves-effect waves-light" 
           :class="isFilled()?'':'disabled'"
-          v-on:click="add">Submit
+          v-on:click="add">Add
           <i class="material-icons right">send</i>
         </button>
       </div>

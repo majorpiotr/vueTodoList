@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="lime darken-1">
     <AddTask @updated="init"></AddTask>
     <ul class="collection with-header">
-      <li class="collection-header"><h4>TodoList</h4></li>
-      <li class="collection-item avatar" v-for="item in items" :key="item.id">
+      <li class="collection-header  amber darken-1"><h4>TodoList</h4></li>
+      <li class="collection-item avatar orange darken-1" v-for="item in items" :key="item.id">
         <ListItem :item="item" @updated="init"></ListItem>
       </li>
     </ul>

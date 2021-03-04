@@ -8,10 +8,11 @@
             <i class="material-icons prefix">account_circle</i>
             <input 
               id="icon_prefix" 
-              type="text" 
+              type="email" 
               class="validate"
               v-model="mail">
             <label for="icon_prefix">Mail</label>
+            <span class="helper-text" data-error="wrong" data-success="right"></span>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">phone</i>
@@ -19,8 +20,10 @@
               id="Password" 
               type="password" 
               class="validate"
+              minlength="9" 
               v-model="password">
             <label for="Password">Password</label>
+            <span class="helper-text" data-error="wrong" data-success="right"></span>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">phone</i>
@@ -28,23 +31,30 @@
               id="Password2" 
               type="password" 
               class="validate"
+              minlength="9" 
               v-model="passwordConfirm">
             <label for="Password2">Repeat Password</label>
+            <span class="helper-text" data-error="wrong" data-success="right"></span>
           </div>
         </div>
         <button 
-
           class="btn waves-effect waves-light" 
           :class="isFilled()?'':'disabled'"
           v-on:click="register()">Submit
           <i class="material-icons right">send</i>
         </button>
+        <div>
+          <p class="deep-orange lighten-1" v-if="!isMailOk()">Mail is not valid</p>
+          <p class="deep-orange lighten-1" v-if="!ispasswordOk()">Passwords are not the same or too short</p>
+        </div>
+
       </div>
     </div>
   </div>
 </template>
 <script>
   import axios from "axios";
+  import M from 'materialize-css';
 export default {
   name: 'Register',
   components:{
@@ -65,9 +75,17 @@ export default {
     },
     methods:
     {
+      isMailOk:function()
+      {
+        return(this.mail.length>5 && this.mail.includes("@"));
+      },
+      ispasswordOk:function()
+      {
+        return(this.passwordConfirm.length>8 && this.passwordConfirm==this.password);
+      },
       isFilled:function()
       {
-        return( this.mail.length>5 && this.password.length>8 && this.passwordConfirm.length>8 && this.passwordConfirm==this.password );
+        return( this.isMailOk() && this.ispasswordOk());
       },
       register:function()
       {
@@ -82,8 +100,19 @@ export default {
             name:this.mail
           }
           }).then((result) => {
-            console.log(result.data);
-            localStorage.setItem("token", result.data.token);
+              console.log(result.data);
+              localStorage.setItem("token", result.data.token);
+              this.$emit('loggedIn');
+            }).catch(function (error) {
+            console.log(JSON.stringify(error.response.data));
+            if(error?.response?.data?.errors)
+            {
+              M.toast({html: error?.response?.data?.errors[0]});
+            }
+            else if(error?.response?.data?.message)
+            {
+              M.toast({html: error?.response?.data?.message});
+            }
         });
       }
     },

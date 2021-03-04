@@ -1,7 +1,9 @@
 <template>
-  <div id="app"  class="container">    
-    <router-view :key="$route.fullPath">
-    </router-view>
+  <div id="app">    
+    <div class="container ">
+      <router-view :key="$route.fullPath">
+      </router-view>
+    </div>
   </div>
 </template>
 <script>
@@ -17,6 +19,33 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  
+  height: 100%;
+  min-height: 100vh;
+
 }
+.fullscreen
+{
+  height: 100%;
+  min-height: 100vh;
+}
+.halfscreen
+{
+  height: 50%;
+  min-height: 50vh;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.noPadding
+{
+  padding: 0;
+  margin: 0;
+}
+
 </style>
